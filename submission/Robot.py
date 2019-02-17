@@ -67,8 +67,9 @@ class Robot(object):
         # If Qtable[state] already exits, then do
         # not change it.
         if state not in self.Qtable.keys():
-            self.Qtable[state] = {k:1./len(self.valid_actions) for k in self.valid_actions}
-
+            # self.Qtable[state] = {k:1./len(self.valid_actions) for k in self.valid_actions}
+            self.Qtable[state] = {k:0. for k in self.valid_actions} # 修改
+            
     def choose_action(self):
         """
         Return an action according to given rules
@@ -78,11 +79,12 @@ class Robot(object):
             # TODO 5. Return whether do random choice
             # hint: generate a random number, and compare
             # it with epsilon
-            random_number = random.random()
-            if random_number > self.epsilon:
-                return False
-            else:
-                return True
+            return random.random() <= self.epsilon # 修改
+#            random_number = random.random()
+#            if random_number > self.epsilon:
+#                return False
+#            else:
+#                return True
             
         if self.learning:
             if is_random_exploration():
